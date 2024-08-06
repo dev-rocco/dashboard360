@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://s7glx6x8mk4q"]
+[gd_scene load_steps=12 format=3 uid="uid://s7glx6x8mk4q"]
 
 [ext_resource type="Script" path="res://Scenes/Intro.gd" id="1_ixg3w"]
 
@@ -8,6 +8,53 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_a0wrl"]
 font_size = 32
 font_color = Color(0, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cy43y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sbmb2"]
+font_color = Color(0, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1trfp"]
+font_size = 24
+
+[sub_resource type="Animation" id="Animation_e84jy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blackout:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OSWarnText:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("IntroGraphic:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_icr8l"]
 resource_name = "intro"
@@ -19,7 +66,7 @@ tracks/0/path = NodePath("Blackout:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7, 3, 3.7),
+"times": PackedFloat32Array(0.5, 1.5, 3.5, 4.5),
 "transitions": PackedFloat32Array(0.5, 1, 1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
@@ -39,8 +86,9 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_e84jy"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_pb8ue"]
+resource_name = "fadein"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -48,15 +96,84 @@ tracks/0/path = NodePath("Blackout:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.5, 1.5),
+"transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 1)]
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OSWarnText/Buttons/Proceed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"grab_focus"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_f8grv"]
+resource_name = "fadetointro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blackout:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["intro", -1, 1.0, false],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OSWarnText:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("IntroGraphic:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jcue6"]
 _data = {
 "RESET": SubResource("Animation_e84jy"),
+"fadein": SubResource("Animation_pb8ue"),
+"fadetointro": SubResource("Animation_f8grv"),
 "intro": SubResource("Animation_icr8l")
 }
 
@@ -78,31 +195,106 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="IntroGraphic" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -114.5
+offset_left = -112.5
 offset_top = -22.5
-offset_right = 114.5
+offset_right = 112.5
 offset_bottom = 22.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="DashboardLabel" type="Label" parent="HBoxContainer"]
+[node name="DashboardLabel" type="Label" parent="IntroGraphic"]
 layout_mode = 2
 text = "Dashboard"
 label_settings = SubResource("LabelSettings_t6rto")
 
-[node name="360Label" type="Label" parent="HBoxContainer"]
+[node name="360Label" type="Label" parent="IntroGraphic"]
 layout_mode = 2
 text = "360"
 label_settings = SubResource("LabelSettings_a0wrl")
 
+[node name="OSWarnText" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IntroGraphic" type="HBoxContainer" parent="OSWarnText"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -56.5
+offset_top = 16.0
+offset_right = 56.5
+offset_bottom = 39.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+
+[node name="DashboardLabel" type="Label" parent="OSWarnText/IntroGraphic"]
+layout_mode = 2
+text = "Dashboard"
+label_settings = SubResource("LabelSettings_cy43y")
+
+[node name="360Label" type="Label" parent="OSWarnText/IntroGraphic"]
+layout_mode = 2
+text = "360"
+label_settings = SubResource("LabelSettings_sbmb2")
+
+[node name="Label" type="Label" parent="OSWarnText"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -316.5
+offset_top = -24.5
+offset_right = 316.5
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "This application has not been designed with [OS] in mind.
+Some features may be unavailable to you."
+label_settings = SubResource("LabelSettings_1trfp")
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="OSWarnText"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = 95.0
+offset_right = 97.0
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Proceed" type="Button" parent="OSWarnText/Buttons"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "Acknowledge and Proceed"
+
+[node name="PreventWarnToggle" type="CheckBox" parent="OSWarnText/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Don't show this again"
+
 [node name="Blackout" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,4 +307,6 @@ color = Color(0, 0, 0, 1)
 libraries = {
 "": SubResource("AnimationLibrary_jcue6")
 }
-autoplay = "intro"
+
+[connection signal="pressed" from="OSWarnText/Buttons/Proceed" to="." method="_on_proceed_pressed"]
+[connection signal="toggled" from="OSWarnText/Buttons/PreventWarnToggle" to="." method="_on_prevent_warn_toggled"]
