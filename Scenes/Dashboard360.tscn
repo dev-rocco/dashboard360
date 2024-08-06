@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://c4l30eocjg2gs"]
+
+[node name="Dashboard360" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pages" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="home" type="Label" parent="Pages"]
+layout_mode = 2
+text = "home"
+
+[node name="social" type="Label" parent="Pages"]
+layout_mode = 2
+text = "social"
+
+[node name="games" type="Label" parent="Pages"]
+layout_mode = 2
+text = "games"
+
+[node name="apps" type="Label" parent="Pages"]
+layout_mode = 2
+text = "apps"
+
+[node name="settings" type="Label" parent="Pages"]
+layout_mode = 2
+text = "settings"
