@@ -1,7 +1,69 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4l30eocjg2gs"]
+[gd_scene load_steps=7 format=3 uid="uid://c4l30eocjg2gs"]
 
 [ext_resource type="Script" path="res://Scenes/Dashboard360.cs" id="1_58pmp"]
+[ext_resource type="Theme" uid="uid://cwqsts1y736ke" path="res://Themes/Dashboard360.tres" id="1_enkhq"]
 [ext_resource type="PackedScene" uid="uid://f6ex15bkhugi" path="res://Scenes/DashboardPages/Home.tscn" id="2_lsa8a"]
+
+[sub_resource type="Animation" id="Animation_sf0uk"]
+resource_name = "fadein"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blackout:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Blackout:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_yd43i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blackout:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Blackout:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1eyuo"]
+_data = {
+"RESET": SubResource("Animation_yd43i"),
+"fadein": SubResource("Animation_sf0uk")
+}
 
 [node name="Dashboard360" type="Control"]
 layout_mode = 3
@@ -10,6 +72,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_enkhq")
 script = ExtResource("1_58pmp")
 
 [node name="Pages" type="HBoxContainer" parent="."]
@@ -41,3 +104,19 @@ text = "settings"
 
 [node name="Home" parent="." instance=ExtResource("2_lsa8a")]
 layout_mode = 1
+
+[node name="Blackout" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1eyuo")
+}
+autoplay = "fadein"

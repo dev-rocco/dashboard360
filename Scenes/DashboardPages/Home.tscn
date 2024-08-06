@@ -1,4 +1,8 @@
-[gd_scene format=3 uid="uid://f6ex15bkhugi"]
+[gd_scene load_steps=4 format=3 uid="uid://f6ex15bkhugi"]
+
+[ext_resource type="Script" path="res://Scenes/DashboardPages/Home.gd" id="1_8q7h2"]
+[ext_resource type="Theme" uid="uid://cwqsts1y736ke" path="res://Themes/Dashboard360.tres" id="1_uro1b"]
+[ext_resource type="Texture2D" uid="uid://p4730os7p6op" path="res://Icons/steam.svg" id="2_o23at"]
 
 [node name="Home" type="Control"]
 layout_mode = 3
@@ -7,6 +11,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_uro1b")
+script = ExtResource("1_8q7h2")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -25,7 +31,7 @@ grow_vertical = 2
 [node name="Left" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="HBoxContainer/Left"]
+[node name="PlayRecent" type="Button" parent="HBoxContainer/Left"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 text = "Play [MOST RECENT]"
@@ -43,12 +49,49 @@ text = "Xbox App"
 [node name="Right" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="HBoxContainer/Right"]
+[node name="Steam" type="Button" parent="HBoxContainer/Right"]
+clip_contents = true
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-text = "Steam"
+clip_text = true
+expand_icon = true
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Right/Steam"]
+modulate = Color(0.54099, 0.54099, 0.54099, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -142.0
+offset_right = 143.0
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_o23at")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Right/Steam"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Right/Steam/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Open Steam"
+vertical_alignment = 2
 
 [node name="Button2" type="Button" parent="HBoxContainer/Right"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 text = "Apps"
+
+[connection signal="button_up" from="HBoxContainer/Right/Steam" to="." method="_on_steam_pressed"]
