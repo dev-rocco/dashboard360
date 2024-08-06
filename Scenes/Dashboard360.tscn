@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4l30eocjg2gs"]
+[gd_scene load_steps=3 format=3 uid="uid://c4l30eocjg2gs"]
 
 [ext_resource type="Script" path="res://Scenes/Dashboard360.cs" id="1_58pmp"]
+[ext_resource type="PackedScene" uid="uid://f6ex15bkhugi" path="res://Scenes/DashboardPages/Home.tscn" id="2_lsa8a"]
 
 [node name="Dashboard360" type="Control"]
 layout_mode = 3
@@ -12,9 +13,11 @@ grow_vertical = 2
 script = ExtResource("1_58pmp")
 
 [node name="Pages" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 280.0
+offset_bottom = 65.0
 
 [node name="home" type="Label" parent="Pages"]
 layout_mode = 2
@@ -35,3 +38,6 @@ text = "apps"
 [node name="settings" type="Label" parent="Pages"]
 layout_mode = 2
 text = "settings"
+
+[node name="Home" parent="." instance=ExtResource("2_lsa8a")]
+layout_mode = 1
