@@ -1,14 +1,15 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://cwqsts1y736ke"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5el80"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajpvn"]
 bg_color = Color(0.180329, 0.463734, 0, 1)
+anti_aliasing_size = 8.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vsg50"]
 bg_color = Color(0.180329, 0.463734, 0, 1)
 
 [resource]
 Button/font_sizes/font_size = 20
-Button/styles/focus = SubResource("StyleBoxFlat_5el80")
+Button/styles/focus = SubResource("StyleBoxFlat_ajpvn")
 Button/styles/normal = SubResource("StyleBoxFlat_vsg50")
 Label/constants/shadow_offset_x = 2
 Label/constants/shadow_offset_y = 2
