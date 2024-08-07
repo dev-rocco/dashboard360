@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://f6ex15bkhugi"]
+[gd_scene load_steps=5 format=3 uid="uid://f6ex15bkhugi"]
 
 [ext_resource type="Script" path="res://Scenes/DashboardPages/Home.gd" id="1_8q7h2"]
 [ext_resource type="Theme" uid="uid://cwqsts1y736ke" path="res://Themes/Dashboard360.tres" id="1_uro1b"]
 [ext_resource type="Texture2D" uid="uid://p4730os7p6op" path="res://Icons/steam.svg" id="2_o23at"]
+[ext_resource type="PackedScene" uid="uid://dym8dpu1j54ug" path="res://Prefabs/AnimatedButton/AnimatedButton.tscn" id="3_6dj34"]
 
 [node name="Home" type="Control"]
 layout_mode = 3
@@ -14,7 +15,7 @@ grow_vertical = 2
 theme = ExtResource("1_uro1b")
 script = ExtResource("1_8q7h2")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Buttons" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -28,35 +29,39 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Left" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Left" type="VBoxContainer" parent="Buttons"]
 layout_mode = 2
 
-[node name="PlayRecent" type="Button" parent="HBoxContainer/Left"]
-custom_minimum_size = Vector2(200, 200)
+[node name="PlayRecent" parent="Buttons/Left" instance=ExtResource("3_6dj34")]
 layout_mode = 2
-text = "Play [MOST RECENT]"
+focus_neighbor_right = NodePath("../../Xbox")
+focus_neighbor_bottom = NodePath("../RecentGames")
+text = "Play [RECENT]"
 
-[node name="Button2" type="Button" parent="HBoxContainer/Left"]
-custom_minimum_size = Vector2(200, 200)
+[node name="RecentGames" parent="Buttons/Left" instance=ExtResource("3_6dj34")]
 layout_mode = 2
-text = "Recent"
+focus_neighbor_top = NodePath("../PlayRecent")
+focus_neighbor_right = NodePath("../../Xbox")
+text = "Recent Games"
 
-[node name="Store" type="Button" parent="HBoxContainer"]
+[node name="Xbox" parent="Buttons" instance=ExtResource("3_6dj34")]
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
-text = "Xbox App"
+focus_neighbor_left = NodePath("../Left/PlayRecent")
+focus_neighbor_right = NodePath("../Right/Steam")
+text = "Xbox"
 
-[node name="Right" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Right" type="VBoxContainer" parent="Buttons"]
 layout_mode = 2
 
-[node name="Steam" type="Button" parent="HBoxContainer/Right"]
-clip_contents = true
-custom_minimum_size = Vector2(200, 200)
+[node name="Steam" parent="Buttons/Right" instance=ExtResource("3_6dj34")]
 layout_mode = 2
-clip_text = true
-expand_icon = true
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../../Xbox")
+focus_neighbor_bottom = NodePath("../Apps")
 
-[node name="Icon" type="TextureRect" parent="HBoxContainer/Right/Steam"]
+[node name="Icon" type="TextureRect" parent="Buttons/Right/Steam"]
 modulate = Color(0.54099, 0.54099, 0.54099, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -73,7 +78,7 @@ grow_vertical = 2
 texture = ExtResource("2_o23at")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Right/Steam"]
+[node name="MarginContainer" type="MarginContainer" parent="Buttons/Right/Steam"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,7 +86,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Right/Steam/MarginContainer"]
+[node name="Label" type="Label" parent="Buttons/Right/Steam/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -89,9 +94,8 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "Open Steam"
 vertical_alignment = 2
 
-[node name="Button2" type="Button" parent="HBoxContainer/Right"]
-custom_minimum_size = Vector2(200, 200)
+[node name="Apps" parent="Buttons/Right" instance=ExtResource("3_6dj34")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../Xbox")
+focus_neighbor_top = NodePath("../Steam")
 text = "Apps"
-
-[connection signal="button_up" from="HBoxContainer/Right/Steam" to="." method="_on_steam_pressed"]
