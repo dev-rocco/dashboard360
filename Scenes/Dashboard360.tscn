@@ -9,7 +9,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Blackout:color")
+tracks/0/path = NodePath("StaticElements/Blackout:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -21,7 +21,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Blackout:visible")
+tracks/1/path = NodePath("StaticElements/Blackout:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -37,7 +37,7 @@ length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Blackout:color")
+tracks/0/path = NodePath("StaticElements/Blackout:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -49,7 +49,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Blackout:visible")
+tracks/1/path = NodePath("StaticElements/Blackout:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -65,7 +65,7 @@ _data = {
 "fadein": SubResource("Animation_sf0uk")
 }
 
-[node name="Dashboard360" type="Control"]
+[node name="Dashboard360" type="Control" node_paths=PackedStringArray("_currentPrimary")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,49 +74,57 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_enkhq")
 script = ExtResource("1_58pmp")
+_currentPrimary = NodePath("Pages/Home")
 
 [node name="Pages" type="HBoxContainer" parent="."]
 layout_mode = 1
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 280.0
-offset_bottom = 65.0
-
-[node name="home" type="Label" parent="Pages"]
-layout_mode = 2
-text = "home"
-
-[node name="social" type="Label" parent="Pages"]
-layout_mode = 2
-text = "social"
-
-[node name="games" type="Label" parent="Pages"]
-layout_mode = 2
-text = "games"
-
-[node name="apps" type="Label" parent="Pages"]
-layout_mode = 2
-text = "apps"
-
-[node name="settings" type="Label" parent="Pages"]
-layout_mode = 2
-text = "settings"
-
-[node name="Home" parent="." instance=ExtResource("2_lsa8a")]
-layout_mode = 1
-
-[node name="Blackout" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_right = 4.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+
+[node name="Home" parent="Pages" instance=ExtResource("2_lsa8a")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Social" parent="Pages" instance=ExtResource("2_lsa8a")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Settings" parent="Pages" instance=ExtResource("2_lsa8a")]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_1eyuo")
 }
 autoplay = "fadein"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="StaticElements" type="CanvasLayer" parent="."]
+
+[node name="PageNames" type="HBoxContainer" parent="StaticElements"]
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 340.0
+offset_bottom = 65.0
+theme = ExtResource("1_enkhq")
+theme_override_constants/separation = 10
+
+[node name="Blackout" type="ColorRect" parent="StaticElements"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
