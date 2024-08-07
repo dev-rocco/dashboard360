@@ -17,7 +17,7 @@ func _ready():
 
 
 	# If warn prevention is false and operating system is not Windows, show OSWarnText before intro
-	if (OS.get_name() != "Linux" && config.OSWarnPrevent == false):
+	if (OS.get_name() != "Windows" && config.OSWarnPrevent == false):
 		get_node("OSWarnText").set_visible(true)
 		get_node("IntroGraphic").set_visible(false)
 		get_node("AnimationPlayer").play("fadein")
