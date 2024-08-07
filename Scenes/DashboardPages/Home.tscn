@@ -118,8 +118,8 @@ grow_vertical = 2
 
 [connection signal="focus_entered" from="Buttons/Left/PlayRecent" to="." method="become_primary"]
 [connection signal="focus_entered" from="Buttons/Left/RecentGames" to="." method="become_primary"]
-[connection signal="button_up" from="Buttons/Xbox" to="." method="_on_xbox_pressed"]
 [connection signal="focus_entered" from="Buttons/Xbox" to="." method="become_primary"]
-[connection signal="button_up" from="Buttons/Right/Steam" to="." method="_on_steam_pressed"]
+[connection signal="pressed" from="Buttons/Xbox" to="." method="_on_xbox_pressed"]
 [connection signal="focus_entered" from="Buttons/Right/Steam" to="." method="become_primary"]
+[connection signal="pressed" from="Buttons/Right/Steam" to="." method="_on_steam_pressed"]
 [connection signal="focus_entered" from="Buttons/Right/Apps" to="." method="become_primary"]

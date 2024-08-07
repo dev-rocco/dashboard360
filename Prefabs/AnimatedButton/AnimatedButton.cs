@@ -5,6 +5,8 @@ public partial class AnimatedButton : Button
 {
     private bool _enlarged = false;
     [Export] private Vector2 _targetScale = new Vector2(1.1f, 1.1f);
+    [Export] private float _scaleChangeSpeedMultiplier = 1f;
+    private bool _buttonBeingHeld = false; // Used to prevent glitch caused by selecting another UI element while holding a button down
 
     private AnimationPlayer _anim;
 
@@ -18,9 +20,9 @@ public partial class AnimatedButton : Button
     public override void _Process(double delta)
     {
         if (_enlarged)
-            Scale = Scale.Lerp(_targetScale, 10f * (float)delta);
+            Scale = Scale.Lerp(_targetScale, 10f * (float)delta * _scaleChangeSpeedMultiplier);
         else
-            Scale = Scale.Lerp(new Vector2(1f, 1f), 10f * (float)delta);
+            Scale = Scale.Lerp(new Vector2(1f, 1f), 10f * (float)delta * _scaleChangeSpeedMultiplier);
     }
 
     public void _on_focus_entered()
@@ -34,5 +36,24 @@ public partial class AnimatedButton : Button
         _enlarged = false;
         _anim.Play("shrink");
         ZIndex -= 5;
+
+        if (_buttonBeingHeld)
+            _on_button_up();
+    }
+
+    public void _on_button_down()
+    {
+        _scaleChangeSpeedMultiplier *= 4.5f;
+        _targetScale /= 1.3f;
+        _buttonBeingHeld = true;
+    }
+    public void _on_button_up()
+    {
+        if (_buttonBeingHeld)
+        {
+            _scaleChangeSpeedMultiplier /= 4.5f;
+            _targetScale *= 1.3f;
+            _buttonBeingHeld = false;
+        }
     }
 }
