@@ -13,7 +13,6 @@ public partial class AnimatedButton : Button
         PivotOffset = CustomMinimumSize / 2f;
         _anim = GetNode<AnimationPlayer>("AnimationPlayer");
         TextureRect shadow = GetNode<TextureRect>("Shadow");
-        // shadow.Size = CustomMinimumSize + (new Vector2(50f, 50f) * (CustomMinimumSize / new Vector2(200f, 200f)));
         shadow.Position = Size / -10f;
     }
     public override void _Process(double delta)
