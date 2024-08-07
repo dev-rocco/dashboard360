@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dym8dpu1j54ug"]
+
+[ext_resource type="Script" path="res://Prefabs/AnimatedButton/AnimatedButton.cs" id="1_a028s"]
+
+[node name="AnimatedButton" type="Button"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 200)
+offset_right = 200.0
+offset_bottom = 200.0
+script = ExtResource("1_a028s")
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
