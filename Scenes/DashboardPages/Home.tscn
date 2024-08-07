@@ -108,3 +108,6 @@ layout_mode = 2
 focus_neighbor_left = NodePath("../../Xbox")
 focus_neighbor_top = NodePath("../Steam")
 text = "Apps"
+
+[connection signal="button_up" from="Buttons/Xbox" to="." method="_on_xbox_pressed"]
+[connection signal="button_up" from="Buttons/Right/Steam" to="." method="_on_steam_pressed"]
