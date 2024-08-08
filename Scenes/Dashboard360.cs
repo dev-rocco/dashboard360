@@ -31,4 +31,8 @@ public partial class Dashboard360 : Control
 		_currentPrimary.Call("give_focus");
 		_cam.ResetSmoothing();
 	}
+
+	// TODO:
+	//	• Pause app when unfocused (https://www.reddit.com/r/godot/comments/bpmwf7/how_to_detect_if_game_lost_focus)
+	//	• Grab window focus when Steam closes (https://forum.godotengine.org/t/how-to-grab-focus-in-the-running-project/47237)
 }
