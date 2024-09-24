@@ -9,11 +9,11 @@ func _ready():
 	get_node("OSWarnText/Label").set_text(get_node("OSWarnText/Label").text.replace("[OS]", OS.get_name()))
 
 	# Check config for warn prevention
-	if (!FileAccess.file_exists(Global.CONFIG_PATH)):
+	if (!FileAccess.file_exists(Global.get("GD_CONFIG_PATH"))):
 		config = load("res://CustomResources/Config/ConfigRes.cs").new()
-		ResourceSaver.save(config, Global.CONFIG_PATH)
+		ResourceSaver.save(config, Global.get("GD_CONFIG_PATH"))
 	else:
-		config = ResourceLoader.load(Global.CONFIG_PATH)
+		config = ResourceLoader.load(Global.get("GD_CONFIG_PATH"))
 
 
 	# If warn prevention is false and operating system is not Windows, show OSWarnText before intro

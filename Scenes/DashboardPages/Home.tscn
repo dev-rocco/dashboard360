@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://cwqsts1y736ke" path="res://Themes/Dashboard360.tres" id="1_uro1b"]
 [ext_resource type="Texture2D" uid="uid://p4730os7p6op" path="res://Icons/steam.svg" id="2_o23at"]
 [ext_resource type="PackedScene" uid="uid://dym8dpu1j54ug" path="res://Prefabs/AnimatedButton/AnimatedButton.tscn" id="3_6dj34"]
-[ext_resource type="Script" path="res://Scenes/DashboardPages/AppsPage.gd" id="5_jrey4"]
+[ext_resource type="Script" path="res://Scenes/DashboardPages/AppsPage.cs" id="5_k88yn"]
 
 [node name="Home" type="Control"]
 custom_minimum_size = Vector2(908, 504)
@@ -126,7 +126,7 @@ offset_top = 1000.0
 offset_bottom = 1000.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("5_jrey4")
+script = ExtResource("5_k88yn")
 
 [node name="CameraTarget" type="Control" parent="AppsPage"]
 layout_mode = 1
@@ -160,6 +160,18 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "+"
 
+[node name="AddAppDialog" type="FileDialog" parent="AppsPage"]
+title = "Open a File"
+initial_position = 2
+size = Vector2i(600, 500)
+always_on_top = true
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+file_mode = 0
+access = 2
+filters = PackedStringArray(".exe")
+use_native_dialog = true
+
 [connection signal="focus_entered" from="Buttons/Left/PlayRecent" to="." method="become_primary"]
 [connection signal="focus_entered" from="Buttons/Left/RecentGames" to="." method="become_primary"]
 [connection signal="focus_entered" from="Buttons/Xbox" to="." method="become_primary"]
@@ -168,4 +180,5 @@ text = "+"
 [connection signal="pressed" from="Buttons/Right/Steam" to="." method="_on_steam_pressed"]
 [connection signal="focus_entered" from="Buttons/Right/Apps" to="." method="become_primary"]
 [connection signal="pressed" from="Buttons/Right/Apps" to="." method="_on_apps_pressed"]
-[connection signal="pressed" from="AppsPage/Buttons/AddApp" to="." method="_on_add_app_pressed"]
+[connection signal="pressed" from="AppsPage/Buttons/AddApp" to="AppsPage" method="_on_add_app_pressed"]
+[connection signal="file_selected" from="AppsPage/AddAppDialog" to="AppsPage" method="_on_add_app_dialog_file_selected"]

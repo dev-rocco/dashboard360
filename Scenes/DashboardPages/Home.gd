@@ -1,6 +1,6 @@
 extends Control
 
-var config = ResourceLoader.load(Global.CONFIG_PATH)
+var config = ResourceLoader.load(Global.get("GD_CONFIG_PATH"))
 var in_submenu = false
 
 func _unhandled_input(_event):
@@ -19,7 +19,7 @@ func _on_apps_pressed():
 		i.focus_mode = FOCUS_ALL
 	
 	get_parent().get_parent().SwitchPrimary(get_node("AppsPage"))
-	get_node("AppsPage").give_focus()
+	get_node("AppsPage").call("GiveFocus")
 	in_submenu = true
 
 func become_primary():
