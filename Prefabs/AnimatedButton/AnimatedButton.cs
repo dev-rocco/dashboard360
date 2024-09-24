@@ -1,5 +1,5 @@
-using Godot;
 using System;
+using Godot;
 
 public partial class AnimatedButton : Button
 {
@@ -19,10 +19,7 @@ public partial class AnimatedButton : Button
     }
     public override void _Process(double delta)
     {
-        if (_enlarged)
-            Scale = Scale.Lerp(_targetScale, 10f * (float)delta * _scaleChangeSpeedMultiplier);
-        else
-            Scale = Scale.Lerp(new Vector2(1f, 1f), 10f * (float)delta * _scaleChangeSpeedMultiplier);
+        Scale = _enlarged ? Scale.Lerp(_targetScale, 10f * (float)delta * _scaleChangeSpeedMultiplier) : Scale = Scale.Lerp(new Vector2(1f, 1f), 10f * (float)delta * _scaleChangeSpeedMultiplier);
     }
 
     public void _on_focus_entered()

@@ -103,6 +103,7 @@ custom_minimum_size = Vector2(200, 200)
 offset_right = 200.0
 offset_bottom = 200.0
 theme = ExtResource("1_1cxwi")
+text_overrun_behavior = 1
 script = ExtResource("1_a028s")
 
 [node name="Control" type="Control" parent="."]
