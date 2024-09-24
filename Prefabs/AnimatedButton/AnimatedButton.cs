@@ -19,6 +19,9 @@ public partial class AnimatedButton : Button
     }
     public override void _Process(double delta)
     {
+        // TODO: Only scale while current scale is not desired rather than every frame to save processing time. Not a huge issue right now but could cause performance issues when many buttons are present in the scene.
+        // TODO: Explore whether tweens would be a better option than lerping for this use-case.
+        // Also, devise a solution to scale the button without scaling the actual button node (while still providing easy access to its class functions) as directly changing the scale of UI elements seems to be discouraged.
         Scale = _enlarged ? Scale.Lerp(_targetScale, 10f * (float)delta * _scaleChangeSpeedMultiplier) : Scale = Scale.Lerp(new Vector2(1f, 1f), 10f * (float)delta * _scaleChangeSpeedMultiplier);
     }
 
@@ -34,6 +37,7 @@ public partial class AnimatedButton : Button
         _anim.Play("shrink");
         ZIndex -= 5;
 
+        // Properly revert scale if selected menu item is switched while select is held
         if (_buttonBeingHeld)
             _on_button_up();
     }
